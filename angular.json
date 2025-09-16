@@ -5,6 +5,9 @@
   "projects": {
     "angular-exam": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "fr"  
+      },
       "schematics": {},
       "root": "",
       "sourceRoot": "src",

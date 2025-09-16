@@ -1,9 +1,10 @@
 import { Component, inject, input } from '@angular/core';
-import { PictureApi } from '../api/picture/picture-api';
+import { PictureApi } from '../api/pictures/picture-api';
+import { PicturesList } from "./pictures-list/pictures-list";
 
 @Component({
   selector: 'app-pictures-page',
-  imports: [],
+  imports: [PicturesList],
   templateUrl: './pictures-page.html',
   styleUrl: './pictures-page.css'
 })

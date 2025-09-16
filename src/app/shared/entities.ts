@@ -26,10 +26,16 @@ export interface Picture {
   title:string;
   author:User;
   createdAt:Date;
+  likes?:Like[];
 }
 
 export interface Comment {
   id:number;
   content:string;
   createdAt:Date;
+  author:User;
+}
+
+export interface Like {
+  user:User;
 }

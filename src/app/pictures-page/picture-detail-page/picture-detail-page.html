@@ -1,0 +1,59 @@
+
+<div class="container">
+
+    <section>
+        <div class="col-lg-10 mx-auto">
+
+            @if(picture.hasValue()){
+
+            @let pict = picture.value();
+
+            <h1 class="mb-4">
+                {{pict.title}}
+            </h1>
+            
+            
+            <img class="mb-4" [src]="pict.image" alt="{{pict.title}}">
+
+            <p class="fs-4">
+                {{pict.description}}
+            </p>
+
+            <hr>
+
+            <h2 class="fs-4">Auteur: {{pict.author.displayName}}</h2>
+
+        
+
+            } @else {
+                <p>Picture not found.</p>
+            }
+        </div>
+
+    </section>
+
+    <section>
+        <div class="col-lg-10 mx-auto">
+
+            <h2 class="mb-4">Commentaires</h2>
+
+            @if(comment.hasValue()) {
+
+                @for(item of comment.value(); track item.id) {
+                    <article class="border p-4 mb-4">
+                        <p class="fs-4">{{item.content}}</p>
+                        <p>De <span class="text-bold">{{item.author.displayName}}</span></p>
+                        <p>Commentaire posté le {{item.createdAt | date:'medium':'':'fr' }}</p> 
+                    </article>
+   
+                }
+                
+            } @else {
+                <p>L'image n'a aucun commentaire pour le moment.</p>
+            }
+        </div>
+    </section>
+
+</div>
+
+

@@ -1,0 +1,21 @@
+<article class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">{{picture().title}}</h5>
+
+    <p class="card-text">
+        <img class="img-thumbnail w-100 mb-2" [src]="picture().image" alt="{{picture().title}}">
+
+        @if(picture().likes?.length == 0) {
+        <ng-icon name="bootstrapSuitHeart" class="fs-5 d-block m-auto"></ng-icon>
+        } @else {
+        
+        }
+
+    </p>
+
+    <div>
+        <button [routerLink]="['/picture', picture().id]" class="d-block m-auto btn btn-primary btn-sm">Détails</button>
+    </div>
+    
+  </div>
+</article>

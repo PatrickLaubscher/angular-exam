@@ -24,4 +24,10 @@ export class PictureApi {
     });
   }
 
+  getOne(id:Signal<number>) {
+    return httpResource<Picture>(() => environment.serverUrl+'/api/picture/' + id());
+
+  }
+
+
 }

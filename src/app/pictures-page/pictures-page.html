@@ -5,17 +5,21 @@
 </section>
 
 <section>
+    @if(picturePage.isLoading()){
+    <p>Loading...</p>
 
-    <div class="d-flex flex-wrap justify-content-center gap-3 mw-100">
-        @for (item of picturePage.value()?.content; track item.id) {
+    } @else {
 
-            <img src="{{item.image}}">
+        @if(picturePage.hasValue() && picturePage.value().totalElements > 0) {
 
+        <app-pictures-list [pictures]="picturePage.value().content" />
+
+        } @else {
+
+        <p>There is no images.</p>
         }
 
-    </div>
-
-
+    }
 </section>
 
 
