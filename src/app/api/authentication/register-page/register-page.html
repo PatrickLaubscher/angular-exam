@@ -1,0 +1,92 @@
+<section>
+
+    <h1>Créer un compte</h1>
+
+    @if(serverError()) {
+        <p class="fs-4 text-danger position-absolute">
+            {{serverError()}}
+        </p>
+    }
+
+</section>
+
+
+<section>
+    
+    <form class="col-md-8 col-lg-6 m-auto" [formGroup]="form" (ngSubmit)="submit()">
+
+        <mat-form-field class="w-100">
+            <mat-label for="email">Pseudo</mat-label>
+            <input matInput type="text" id="displayName" formControlName="displayName" required>
+
+                @let displayNameInput = form.controls.displayName;
+                @if (displayNameInput.invalid && (displayNameInput.dirty || displayNameInput.touched)) {
+                    @if (emailInput.hasError('required')) {
+                        <mat-error>
+                            Un pseudo est obligatoire.
+                        </mat-error>
+                    }
+                }
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+            <mat-label for="email">Email</mat-label>
+            <input matInput type="text" id="email" formControlName="email" required>
+
+                @let emailInput = form.controls.email;
+                @if (emailInput.invalid && (emailInput.dirty || emailInput.touched)) {
+                    @if (emailInput.hasError('required')) {
+                        <mat-error>
+                            Un email est requis.
+                        </mat-error>
+                    }
+                    @if (emailInput.hasError('email')) {
+                        <mat-error>
+                            La valeur doit être un email valide.
+                        </mat-error>
+                    }
+                }
+
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+            <mat-label for="password" class="form-label">Mot de passe</mat-label>
+            <input matInput type="password" id="password" formControlName="password" required>
+
+                @let passwordInput = form.controls.password;
+
+                @if (passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)) {
+                    @if (passwordInput.hasError('required')) {
+                        <mat-error>
+                            Un mot de passe est requis.
+                        </mat-error>
+                    }
+                    @if (passwordInput.hasError('minlength')) {
+                        <mat-error>
+                            Le mot de passe doit avoir 4 caractères au minimum.
+                        </mat-error>
+                    }
+                }
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+            <mat-label for="password_confirmation" >Répéter le mot de passe</mat-label>
+            <input matInput type="password" id="password_confirmation" formControlName="repeatPassword" required>
+            
+                @if(form.controls.repeatPassword.hasError('required')) {
+                    <mat-error>Renseigner le mot de passe à nouveau</mat-error>
+                }
+                @if(form.controls.repeatPassword.hasError('PasswordNoRepeat')) {
+                    <mat-error>Les 2 mots de passe ne correspondent pas.</mat-error>
+                }
+
+        </mat-form-field>
+        
+
+
+        <div class="w-100">
+            <button class="d-block m-auto" type="submit" matButton="filled" [disabled]="form.invalid">Valider</button>
+        </div>
+    </form>
+</section>
+

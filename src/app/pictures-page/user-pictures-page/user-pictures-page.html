@@ -1,7 +1,13 @@
 <section>
-    <h1>
-        Liste des images
-    </h1>
+    
+    @if(picturePage.hasValue() && picturePage.value().totalElements > 0) {
+
+        <h1>
+            Liste des images de {{picturePage.value().content[0].author.displayName}}
+        </h1>
+
+    }
+
 </section>
 
 <section>

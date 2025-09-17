@@ -30,7 +30,7 @@ export class PictureApi {
         page: page ? page():1
       }
       return {
-        url: environment.serverUrl+'/api/picture/user/'+id(),
+        url: environment.serverUrl+'/api/picture/user/' + id(),
         params
       }
     });
@@ -39,7 +39,6 @@ export class PictureApi {
 
   getOne(id:Signal<number>) {
     return httpResource<Picture>(() => environment.serverUrl+'/api/picture/' + id());
-
   }
 
 

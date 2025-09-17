@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { NavLink } from '../../../shared/entities';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthenticationApi } from '../../../api/authentication/authentication-api';
 
 @Component({
   selector: 'app-header',
@@ -10,14 +11,40 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Header {
 
-    protected readonly navLinks = signal<NavLink[]>([
+  protected readonly auth = inject(AuthenticationApi);
+  
+  displayedLinks = computed(() =>
+    effect(() => {
+      this.navAuth.set(this.auth.isLogged ? this.navLogin : this.navLogOut);
+    })
+  );
+
+
+  protected readonly navLinks = signal<NavLink[]>([
     {
       path:"/",
-      name: "Home"
-    },
-
-
+      name: "Galerie"
+    }
   ]);
 
+  protected readonly navAuth = signal<NavLink[]>;
+
+  navLogin:NavLink[] = [
+    {
+      path:"/login",
+      name: "Se connecter"
+    },
+    {
+      path:"/register",
+      name: "Créer un compte"
+    },
+  ];
+
+  navLogOut:NavLink[] = [
+    {
+      path:"/logout",
+      name: "Se déconnecter"
+    }
+  ];
 
 }
