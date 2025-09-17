@@ -16,13 +16,26 @@ export class PictureApi {
       const params:any = {
         page: page ? page():1
       }
-
       return {
         url: environment.serverUrl+'/api/picture',
         params
       }
     });
   }
+
+
+  getAllByUser(id:Signal<number>, page?:Signal<number>){
+    return httpResource<Page<Picture>>(() => {
+      const params:any = {
+        page: page ? page():1
+      }
+      return {
+        url: environment.serverUrl+'/api/picture/user/'+id(),
+        params
+      }
+    });
+  }
+
 
   getOne(id:Signal<number>) {
     return httpResource<Picture>(() => environment.serverUrl+'/api/picture/' + id());

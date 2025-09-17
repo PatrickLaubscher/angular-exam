@@ -6,6 +6,7 @@ import { PictureDetailPage } from './pictures-page/picture-detail-page/picture-d
 export const routes: Routes = [
     {path:"", component: PublicLayout, children:[
         {path:"", component:HomePage},
-        {path:"picture/:id", component:PictureDetailPage}
+        {path:"picture/:id", component:PictureDetailPage},
+        {path:"author-pictures/:userId", component:UserPicturesPage}
     ]}
 ];

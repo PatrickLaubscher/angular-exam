@@ -21,7 +21,13 @@
 
             <hr>
 
-            <h2 class="fs-4">Auteur: {{pict.author.displayName}}</h2>
+            <h2 class="fs-4">
+                Auteur: 
+                {{pict.author.displayName}}
+            </h2>
+            <p>
+                <a [routerLink]="['/author-pictures', pict.author.id]">Voir les photos de l'auteur</a>
+            </p>
 
         
 

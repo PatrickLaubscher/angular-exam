@@ -1,0 +1,23 @@
+<section>
+    <h1>
+        Liste des images
+    </h1>
+</section>
+
+<section>
+    @if(picturePage.isLoading()){
+    <p>Loading...</p>
+
+    } @else {
+
+        @if(picturePage.hasValue() && picturePage.value().totalElements > 0) {
+
+        <app-pictures-list [pictures]="picturePage.value().content" />
+
+        } @else {
+
+        <p>There is no images.</p>
+        }
+
+    }
+</section>
