@@ -16,4 +16,11 @@ export class PicturesPage {
 
   protected readonly picturePage = this.pictureApi.getAll(this.page);
 
+  reload(changeOnPicture:boolean){
+    if(changeOnPicture){
+      this.picturePage.reload();
+    }
+  }
+
+
 }

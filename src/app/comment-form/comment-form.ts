@@ -1,11 +1,11 @@
 import { Component, inject, input, output, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommentApi } from '../api/comment/comment-api';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommentDTO } from '../api/dto';
 import { Picture } from '../shared/entities';
 import { AuthenticationApi } from '../api/authentication/authentication-api';
+
 
 @Component({
   selector: 'app-comment-form',

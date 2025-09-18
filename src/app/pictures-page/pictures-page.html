@@ -12,7 +12,7 @@
 
         @if(picturePage.hasValue() && picturePage.value().totalElements > 0) {
 
-        <app-pictures-list [pictures]="picturePage.value().content" />
+        <app-pictures-list [pictures]="picturePage.value().content" (changeOnPicture)="reload($event)"/>
 
         } @else {
 

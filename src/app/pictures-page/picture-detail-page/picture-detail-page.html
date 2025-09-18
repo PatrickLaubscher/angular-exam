@@ -19,6 +19,15 @@
                 {{pict.description}}
             </p>
 
+            <button class="like fs-5 d-block" (click)="like()">
+                @if(pict.likes?.length == 0) {
+                <ng-icon name="bootstrapSuitHeart" ></ng-icon>
+                } @else {
+                <ng-icon name="bootstrapSuitHeartFill" ></ng-icon>
+                <span class="p-1">{{pict.likes?.length}}</span>
+                }
+            </button>
+
             <hr>
 
             <h2 class="fs-4">

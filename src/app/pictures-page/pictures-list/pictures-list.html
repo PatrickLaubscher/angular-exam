@@ -3,7 +3,7 @@
 <div class="d-flex flex-wrap justify-content-center gap-5 mw-100">
     @for (item of pictures(); track item.id) {
 
-        <app-picture-card [picture]="item" />
+        <app-picture-card [picture]="item" (addLikeOutput)="reloadList($event)"/>
 
     }
 

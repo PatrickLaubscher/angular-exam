@@ -5,11 +5,16 @@
     <p class="card-text">
         <img class="img-thumbnail w-100 mb-2" [src]="picture().thumbnailLink" alt="{{picture().title}}">
 
-        @if(picture().likes?.length == 0) {
-        <ng-icon name="bootstrapSuitHeart" class="fs-5 d-block m-auto"></ng-icon>
-        } @else {
-        
-        }
+        <button class="like fs-5 d-block m-auto" (click)="like()">
+          @if(picture().likes?.length == 0) {
+          <ng-icon name="bootstrapSuitHeart" ></ng-icon>
+          } @else {
+          <ng-icon name="bootstrapSuitHeartFill" ></ng-icon>
+          <span class="p-1">{{picture().likes?.length}}</span>
+          }
+
+        </button>
+
 
     </p>
 

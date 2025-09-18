@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Picture } from '../../shared/entities';
 import { PictureCard } from "../picture-card/picture-card";
 
@@ -12,4 +12,12 @@ export class PicturesList {
 
   readonly pictures = input.required<Picture[]>();
 
+  readonly changeOnPicture = output<boolean>();
+
+  reloadList(addLikeOutput:boolean) {
+    if(addLikeOutput) {
+      this.changeOnPicture.emit(true);
+    }
+  }
+  
 }
