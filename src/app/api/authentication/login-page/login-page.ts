@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { AuthenticationApi } from '../authentication-api';
 import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -6,6 +6,7 @@ import { LoginCredentialsDTO } from '../../dto';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class LoginPage {
 
   private readonly authApi = inject(AuthenticationApi);
   protected readonly router = inject(Router);
+  protected readonly snackBar = inject(MatSnackBar);
   protected readonly serverError = signal('');
+  readonly redirectUrl = input<string>();
 
   protected readonly form = new FormGroup({
     email: new FormControl<string>('', {validators: [Validators.required, Validators.email]}),
@@ -31,7 +34,8 @@ export class LoginPage {
     this.authApi.login(credentials)
       .subscribe({
         next: () => {
-          this.router.navigate(['/']);
+          this.router.navigateByUrl(this.redirectUrl() ?? '/');
+          this.snackBar.open('Connexion réussie', 'Ok', {duration: 5000})
         },
         error: (err) => {
           if(err.status == 403) {
