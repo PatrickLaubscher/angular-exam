@@ -12,13 +12,10 @@ import { AuthenticationApi } from '../../../api/authentication/authentication-ap
 export class Header {
 
   protected readonly auth = inject(AuthenticationApi);
-  
-  displayedLinks = computed(() =>
-    effect(() => {
-      this.navAuth.set(this.auth.isLogged ? this.navLogin : this.navLogOut);
-    })
-  );
 
+  protected readonly authLinks = computed<NavLink[]>(() =>
+    this.auth.isLogged ? this.navLogout : this.navLogin
+  );
 
   protected readonly navLinks = signal<NavLink[]>([
     {
@@ -27,7 +24,6 @@ export class Header {
     }
   ]);
 
-  protected readonly navAuth = signal<NavLink[]>;
 
   navLogin:NavLink[] = [
     {
@@ -40,11 +36,12 @@ export class Header {
     },
   ];
 
-  navLogOut:NavLink[] = [
+  navLogout:NavLink[] = [
     {
       path:"/logout",
       name: "Se déconnecter"
     }
   ];
+
 
 }

@@ -20,7 +20,7 @@
       </ul>
 
       <ul class="navbar-nav">
-        @for(navItem of navAuth(); track navItem ) {
+        @for(navItem of authLinks(); track navItem ) {
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" 
                   [routerLinkActiveOptions]="{exact: true}" [routerLink]="navItem.path"
