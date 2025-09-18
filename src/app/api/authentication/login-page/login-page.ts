@@ -1,15 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
 import { AuthenticationApi } from '../authentication-api';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginCredentialsDTO } from '../dto';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
+
 @Component({
   selector: 'app-login-page',
-  imports: [ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, RouterLink],
   templateUrl: './login-page.html',
   styleUrl: './login-page.css'
 })

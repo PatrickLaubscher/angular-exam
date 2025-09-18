@@ -2,6 +2,7 @@ import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable, Signal } from '@angular/core';
 import { Page, Picture } from '../../shared/entities';
 import { environment } from '../../../environments/environment.development';
+import { PostPictureDTO } from '../authentication/dto';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,18 @@ export class PictureApi {
 
   getOne(id:Signal<number>) {
     return httpResource<Picture>(() => environment.serverUrl+'/api/picture/' + id());
+  }
+
+
+  add(newPicture:PostPictureDTO) {
+    return this.http.post<Picture>(environment.serverUrl + '/api/picture', newPicture);
+  }
+
+
+  upload(image:File) {
+    const formdata = new FormData();
+    formdata.append("image", image);
+    return this.http.post<{filename:string}>(environment.serverUrl + '/api/picture/upload', formdata);
   }
 
 

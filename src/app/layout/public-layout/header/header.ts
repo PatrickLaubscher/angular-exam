@@ -21,6 +21,10 @@ export class Header {
     {
       path:"/",
       name: "Galerie"
+    },
+    {
+      path:"/upload-picture",
+      name: "Ajouter une image"
     }
   ]);
 
@@ -37,6 +41,10 @@ export class Header {
   ];
 
   navLogout:NavLink[] = [
+    {
+      path:"/account",
+      name: "Mon compte"
+    },
     {
       path:"/logout",
       name: "Se déconnecter"

@@ -1,0 +1,69 @@
+<section>
+
+    <h1>Ajouter une image</h1>
+
+    @if(serverError()) {
+        <p class="danger">{{serverError()}}</p>
+    }
+</section>
+
+
+<section>
+    <form class="col-8 m-auto" [formGroup]="form" (ngSubmit)="submit()">
+
+        <mat-form-field class="w-100">
+            <mat-label for="title" class="form-label">Titre</mat-label>
+            <input  matInput type="text" id="title" class="form-control" formControlName="title" required>
+
+                @let titleInput = form.controls.title;
+
+                @if (titleInput.invalid && (titleInput.dirty || titleInput.touched)) {
+                    <div class="alert">
+                    @if (titleInput.hasError('required')) {
+                        <div>
+                            Un titre est requis.
+                        </div>
+                    }
+                    @if (titleInput.hasError('minlength')) {
+                        <div>
+                            Le titre doit avoir au moins 4 caractères
+                        </div>
+                    }
+                    </div>
+                }
+
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+            <mat-label for="description" class="form-label">Description de l'image</mat-label>
+            <textarea matInput class="form-control" id="description" formControlName="description"></textarea>
+
+            @let descriptionInput = form.controls.description;
+            @if (descriptionInput.invalid && (descriptionInput.dirty || descriptionInput.touched)) {
+                <div class="alert">
+                @if(descriptionInput.hasError('required')) {
+                    <div>
+                        Une description de l'image est requise.
+                    </div>
+                }
+                </div>
+            }
+
+        </mat-form-field>
+
+        <div class="w-100 mb-3">
+            <label for="image" class="form-label">Fichier de l'image</label>
+            <input type="file" id="iamge" class="form-control" formControlName="image" accept="image/*" (change)="extractFile($event)">
+        </div>
+
+        <div class="w-100">
+            <button class="d-block m-auto" type="submit" matButton="filled" [disabled]="form.invalid">Valider</button>
+        </div>
+    </form>
+
+</section>
+
+
+
+
+

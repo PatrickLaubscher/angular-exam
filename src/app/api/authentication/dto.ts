@@ -16,3 +16,10 @@ export interface LoginResponseDTO {
     user:User;
 }
 
+
+export interface PostPictureDTO {
+    title:string;
+    description:string;
+    image:string;
+
+}

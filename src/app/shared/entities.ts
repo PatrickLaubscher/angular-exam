@@ -26,6 +26,8 @@ export interface Picture {
   title:string;
   author:User;
   createdAt:Date;
+  imageLink:string;
+  thumbnailLink:string;
   likes?:Like[];
 }
 
