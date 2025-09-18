@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { confirmPasswordValidator } from '../validators';
-import { UserRegisterDTO } from '../dto';
+import { UserRegisterDTO } from '../../dto';
 import { AuthenticationApi } from '../authentication-api';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';

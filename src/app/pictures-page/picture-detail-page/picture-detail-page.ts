@@ -3,11 +3,12 @@ import { PictureApi } from '../../api/pictures/picture-api';
 import { CommentApi } from '../../api/comment/comment-api';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { CommentForm } from "../../comment-form/comment-form";
 
 
 @Component({
   selector: 'app-picture-detail-page',
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe, RouterLink, CommentForm],
   templateUrl: './picture-detail-page.html',
   styleUrl: './picture-detail-page.css'
 })
@@ -18,5 +19,12 @@ export class PictureDetailPage {
   readonly id = input.required<number>();
   readonly picture = this.pictureApi.getOne(this.id);
   readonly comment = this.commentApi.getAllByPictureId(this.id);
+
+  reload(addCommentOutput:boolean) {
+    if(addCommentOutput) {
+      this.comment.reload();
+    }
+  }
+  
 
 }

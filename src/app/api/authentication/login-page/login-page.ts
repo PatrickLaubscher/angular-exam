@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { AuthenticationApi } from '../authentication-api';
 import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LoginCredentialsDTO } from '../dto';
+import { LoginCredentialsDTO } from '../../dto';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

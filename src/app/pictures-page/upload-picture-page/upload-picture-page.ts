@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PostPictureDTO } from '../../api/authentication/dto';
+import { PostPictureDTO } from '../../api/dto';
 import { PictureApi } from '../../api/pictures/picture-api';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';

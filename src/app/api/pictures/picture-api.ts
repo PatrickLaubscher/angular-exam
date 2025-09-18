@@ -2,7 +2,7 @@ import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable, Signal } from '@angular/core';
 import { Page, Picture } from '../../shared/entities';
 import { environment } from '../../../environments/environment.development';
-import { PostPictureDTO } from '../authentication/dto';
+import { PostPictureDTO } from '../dto';
 
 @Injectable({
   providedIn: 'root'

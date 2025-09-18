@@ -1,9 +1,13 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 section {
     margin: 60px;
+    padding-bottom: 50px;
 }
 
 
-.danger {
+.alert {
     color: red;
 }
 
@@ -13,5 +17,4 @@ section {
     text-decoration: none;
 
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

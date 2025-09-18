@@ -2,7 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { User } from '../../shared/entities';
 import { tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { LoginCredentialsDTO, LoginResponseDTO, UserRegisterDTO } from './dto';
+import { LoginCredentialsDTO, LoginResponseDTO, UserRegisterDTO } from '../dto';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({

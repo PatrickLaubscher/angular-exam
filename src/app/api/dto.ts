@@ -1,4 +1,4 @@
-import { User } from "../../shared/entities";
+import { Picture, User } from "../shared/entities";
 
 
 export interface UserRegisterDTO {
@@ -22,4 +22,9 @@ export interface PostPictureDTO {
     description:string;
     image:string;
 
+}
+
+export interface CommentDTO {
+    content:string;
+    picture:Picture;
 }

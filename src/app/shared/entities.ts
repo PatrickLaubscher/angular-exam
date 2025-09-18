@@ -36,6 +36,7 @@ export interface Comment {
   content:string;
   createdAt:Date;
   author:User;
+  picture:Picture;
 }
 
 export interface Like {

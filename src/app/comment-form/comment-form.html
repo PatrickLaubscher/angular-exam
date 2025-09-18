@@ -1,0 +1,23 @@
+
+<form class="m-auto" [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="mb-3">
+        <label for="content" class="form-label d-none">Content</label>
+        <textarea class="form-control" id="content" formControlName="content">Ecrivez votre commentaire...</textarea>
+
+        @let contentInput = form.controls.content;
+
+        @if (contentInput.invalid && (contentInput.dirty || contentInput.touched)) {
+            <div class="alert">
+            @if(contentInput.hasError('required')) {
+                <div>
+                    Un commentaire ne peut pas être envoyé sans contenu.
+                </div>
+            }
+            </div>
+        }
+
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+</form>
