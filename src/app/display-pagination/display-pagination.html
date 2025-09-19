@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-center gap-5"> 
+
+    @if(!paginated().first) {
+        <a routerLink= './' [queryParams]="{ pageNumber: pageNumber()-1 }" queryParamsHandling="merge">Previous</a>
+    }
+
+    @for(item of [].constructor(paginated().totalPages); track $index) {
+        @let currPage = $index+1;
+        <a routerLink= './' [queryParams]="{ pageNumber: currPage }" queryParamsHandling="merge" [class.active-link]=" pageNumber() == currPage">
+            {{currPage}}
+        </a>
+    }
+
+    @if(!paginated().last) {
+        <a routerLink= './' [queryParams]="{ pageNumber: pageNumber()+1 }" queryParamsHandling="merge">Next</a>
+    }
+
+</div>

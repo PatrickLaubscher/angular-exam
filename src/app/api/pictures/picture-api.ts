@@ -12,10 +12,11 @@ export class PictureApi {
   private readonly http = inject(HttpClient);
   
 
-  getAll(page?:Signal<number>) {
+  getAll(pageNumber?:Signal<number>) {
     return httpResource<Page<Picture>>(() => {
       const params:any = {
-        page: page ? page():1
+        pageNumber: pageNumber ? pageNumber()-1:0,
+        pageSize: 6
       }
       return {
         url: environment.serverUrl+'/api/picture',

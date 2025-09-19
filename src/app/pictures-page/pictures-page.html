@@ -14,6 +14,11 @@
 
         <app-pictures-list [pictures]="picturePage.value().content" (changeOnPicture)="reload($event)"/>
 
+        <div class="my-4">
+            <app-display-pagination [paginated]="picturePage.value()" [pageNumber]="pageNumber()" />
+        </div>
+        
+
         } @else {
 
         <p>There is no images.</p>
