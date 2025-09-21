@@ -2,7 +2,7 @@ import { Component, inject, input, signal } from '@angular/core';
 import { PictureApi } from '../../api/pictures/picture-api';
 import { CommentApi } from '../../api/comment/comment-api';
 import { DatePipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommentForm } from "../../comment-form/comment-form";
 import { AuthenticationApi } from '../../api/authentication/authentication-api';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -21,17 +21,22 @@ import { CommentDTO } from '../../api/dto';
 })
 export class PictureDetailPage {
 
-  private readonly pictureApi = inject(PictureApi);
-  private readonly commentApi = inject(CommentApi);
-  private readonly auth = inject(AuthenticationApi);
-  private readonly snackBar = inject(MatSnackBar);
-  private readonly likeApi = inject(LikeApi);
+  protected readonly pictureApi = inject(PictureApi);
+  protected readonly commentApi = inject(CommentApi);
+  protected readonly auth = inject(AuthenticationApi);
+  protected readonly snackBar = inject(MatSnackBar);
+  protected readonly likeApi = inject(LikeApi);
+  protected readonly router = inject(Router);
 
   protected readonly serverError = signal('');
   readonly id = input.required<number>();
   readonly picture = this.pictureApi.getOne(this.id);
   readonly comment = this.commentApi.getAllByPictureId(this.id);
 
+  
+  get currentUrl(): string {
+    return this.router.url;
+  }
 
   like() {
     if(!this.auth.isLogged) {

@@ -69,6 +69,13 @@
             }
 
             <hr>
+            
+            @if(!this.auth.isLogged) {
+                <a class="information" [routerLink]="['/login']" [queryParams]="{redirectUrl: currentUrl}" >
+                    > Connectez-vous pour poster des commentaires.
+                </a>     
+            }
+           
             <h3 class="mt-5 fs-5">Ajouter un commentaire à l'image</h3>
             <app-comment-form [picture]="picture.value()" (commentOutput)="addComment($event)" />
 

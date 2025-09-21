@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { NavLink } from '../../../shared/entities';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthenticationApi } from '../../../api/authentication/authentication-api';
