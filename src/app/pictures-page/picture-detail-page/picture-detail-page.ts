@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { PictureApi } from '../../api/pictures/picture-api';
 import { CommentApi } from '../../api/comment/comment-api';
 import { DatePipe } from '@angular/common';
@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LikeApi } from '../../api/like/like-api';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { bootstrapSuitHeart, bootstrapSuitHeartFill } from '@ng-icons/bootstrap-icons';
+import { CommentDTO } from '../../api/dto';
 
 
 @Component({
@@ -25,15 +26,12 @@ export class PictureDetailPage {
   private readonly auth = inject(AuthenticationApi);
   private readonly snackBar = inject(MatSnackBar);
   private readonly likeApi = inject(LikeApi);
+
+  protected readonly serverError = signal('');
   readonly id = input.required<number>();
   readonly picture = this.pictureApi.getOne(this.id);
   readonly comment = this.commentApi.getAllByPictureId(this.id);
 
-  reload(addCommentOutput:boolean) {
-    if(addCommentOutput) {
-      this.comment.reload();
-    }
-  }
 
   like() {
     if(!this.auth.isLogged) {
@@ -44,6 +42,30 @@ export class PictureDetailPage {
       next: () => this.picture.reload()
     });
   }
+
+
+  addComment(newComment:CommentDTO) {
+
+    this.serverError.set('');
+
+    if(this.picture.value()?.author.id == this.auth.user()?.id) {
+      this.snackBar.open('Vous ne pouvez pas commenter vos propres photos mais vous pouvez modifier leur description.', 'ok', {duration: 5000})
+      return;
+    }
+
+    this.commentApi.add(newComment)
+      .subscribe({
+        next: () => {
+          this.snackBar.open('Votre commentaire a bien été rajouté !', 'ok', {duration: 5000});
+          this.comment.reload();
+        },
+        error: () => {
+          this.serverError.set("Erreur serveur");
+        }
+      });
+    
+  }
+  
 
 
 }

@@ -1,6 +1,12 @@
 
 <div class="container">
 
+    <section>
+        @if(serverError()) {
+            <p class="danger">{{serverError()}}</p>
+        }
+    </section>
+
     @if(picture.hasValue()){
         
     <section>
@@ -64,7 +70,7 @@
 
             <hr>
             <h3 class="mt-5 fs-5">Ajouter un commentaire à l'image</h3>
-            <app-comment-form [picture]="picture.value()" (addCommentOutput)="reload($event)" />
+            <app-comment-form [picture]="picture.value()" (commentOutput)="addComment($event)" />
 
         </div>
     </section>
