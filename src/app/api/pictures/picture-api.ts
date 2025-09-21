@@ -55,5 +55,8 @@ export class PictureApi {
     return this.http.post<{filename:string}>(environment.serverUrl + '/api/picture/upload', formdata);
   }
 
+  delete(id:Signal<number>){
+    return this.http.delete<Picture>(environment.serverUrl + '/api/picture/' + id());
+  }
 
 }

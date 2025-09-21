@@ -36,9 +36,5 @@ export class PicturesPage {
       this.picturePage.reload();
     }
   }
-
-  constructor() {
-    console.log(this.pageNumber());
-  }
-
+  
 }
