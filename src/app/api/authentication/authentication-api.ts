@@ -2,7 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { User } from '../../shared/entities';
 import { tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { LoginCredentialsDTO, LoginResponseDTO, UserRegisterDTO } from '../dto';
+import { LoginCredentialsDTO, UserRegisterDTO } from '../dto';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
@@ -29,15 +29,16 @@ export class AuthenticationApi {
 
   
   login(credentials: LoginCredentialsDTO) {
-    return this.http.get<LoginResponseDTO>(environment.serverUrl + '/api/account', {
+    return this.http.get<User>(environment.serverUrl + '/api/account', {
       headers: {
         'Authorization': 'Basic ' + btoa(credentials.email + ':' + credentials.password)
       },
       withCredentials: true
     }).pipe(
       tap(res => {
-        localStorage.setItem('user', JSON.stringify(res.user));
-        this.user.set(res.user);
+        localStorage.setItem('user', JSON.stringify(res));
+        console.log(res);
+        this.user.set(res);
       })
     );
   }

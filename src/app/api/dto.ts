@@ -12,11 +12,6 @@ export interface LoginCredentialsDTO {
     password:string;
 }
 
-export interface LoginResponseDTO {
-    user:User;
-}
-
-
 export interface PostPictureDTO {
     title:string;
     description:string;
