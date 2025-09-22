@@ -27,7 +27,6 @@ export class PicturesPage {
     ),
     { initialValue: 1 }
   );
-
   
   protected readonly picturePage = this.pictureApi.getAll(this.pageNumber);
 

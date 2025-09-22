@@ -11,8 +11,10 @@
 
 
 <section>
+    <h2 class="mb-4">Liste de vos images</h2>
+
     @if(picturePage.isLoading()){
-    <p>Loading...</p>
+    <p>Chargement des images...</p>
 
     } @else {
 
@@ -20,9 +22,13 @@
 
         <app-pictures-list [pictures]="picturePage.value().content" />
 
+        <div class="my-4">
+            <app-display-pagination [paginated]="picturePage.value()" [pageNumber]="pageNumber()" />
+        </div>
+
         } @else {
 
-        <p>There is no images.</p>
+        <p>Vous n'avez aucune image.</p>
         }
 
     }
