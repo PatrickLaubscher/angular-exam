@@ -38,7 +38,6 @@ export class PictureApi {
     });
   }
 
-
   getOne(id:Signal<number>) {
     return httpResource<Picture>(() => environment.serverUrl+'/api/picture/' + id());
   }
@@ -57,6 +56,10 @@ export class PictureApi {
 
   delete(id:Signal<number>){
     return this.http.delete<Picture>(environment.serverUrl + '/api/picture/' + id());
+  }
+
+  put(id:Signal<number>, picture:PostPictureDTO) {
+    return this.http.put<Picture>(environment.serverUrl + '/api/picture/'+ id(), picture);
   }
 
 }

@@ -8,10 +8,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { StandardModal } from "../../standard-modal/standard-modal";
+import { PictureForm } from "../../pictures-page/upload-picture-page/picture-form/picture-form";
+import { PostPictureDTO } from '../../api/dto';
 
 @Component({
   selector: 'app-account-main-page',
-  imports: [PicturesList, DisplayPagination, StandardModal],
+  imports: [PicturesList, DisplayPagination, StandardModal, PictureForm],
   templateUrl: './account-main-page.html',
   styleUrl: './account-main-page.css'
 })
@@ -20,6 +22,7 @@ export class AccountMainPage {
   protected readonly auth = inject(AuthenticationApi);
   protected readonly pictureApi = inject(PictureApi);
   protected readonly isDeleteModalOpen = signal(false);
+  protected readonly isUpdateModalOpen = signal(false);
   protected readonly userId = signal<number>(this.auth.user()!.id);
   protected readonly route = inject(ActivatedRoute);
   protected readonly picture = signal<Picture|null>(null);
@@ -35,6 +38,7 @@ export class AccountMainPage {
   );
   
   protected readonly picturePage = this.pictureApi.getAllByUser(this.userId, this.page);
+
 
   showDeleteModal(picture:Picture) {
     this.isDeleteModalOpen.set(true);
@@ -58,6 +62,33 @@ export class AccountMainPage {
 
   }
 
+
+  showUpdateModal(picture:Picture) {
+    this.isUpdateModalOpen.set(true);
+    this.picture.set(picture);
+  }
+
+
+  updatePicture(pictureUpdated:PostPictureDTO, pictureFile:File|undefined) {
+
+    const picture = this.picture();
+    if (!picture) return;
+ 
+    const pictureId = signal<number>(picture.id);
+
+    this.pictureApi.put(pictureId, pictureUpdated).subscribe({
+    next: () => {
+      this.isUpdateModalOpen.set(false);
+      this.picturePage.reload();
+    },
+    error: () => {
+      this.serverError.set("Erreur dans la modification de l'image");
+    }
+  });
+
+
+
+  }
 
 
 }

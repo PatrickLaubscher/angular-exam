@@ -1,17 +1,18 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostPictureDTO } from '../../api/dto';
 import { PictureApi } from '../../api/pictures/picture-api';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { map, of, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { PictureForm } from "./picture-form/picture-form";
 
 @Component({
   selector: 'app-upload-picture-page',
-  imports: [ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, PictureForm],
   templateUrl: './upload-picture-page.html',
   styleUrl: './upload-picture-page.css'
 })
@@ -21,22 +22,6 @@ export class UploadPicturePage {
   private readonly router = inject(Router);
   private readonly snackBar = inject(MatSnackBar);
   protected readonly serverError = signal('');
-
-  private readonly fb = inject(FormBuilder);
-
-  pictureFile?: File;
-
-  protected readonly form = new FormGroup({
-    title: new FormControl<string>('', {validators: [Validators.required, Validators.minLength(4)]}),
-    description: new FormControl<string>('', {validators: [Validators.required]}),
-    image: new FormControl<string>('')
-  });
-
-
-  extractFile(event: Event) {
-    const target = event.target as HTMLInputElement;
-    this.pictureFile = target.files?.[0];
-  }
 
 
   addPicture(newPicture:PostPictureDTO, pictureFile:File|undefined) {
@@ -50,8 +35,8 @@ export class UploadPicturePage {
 
     this.pictureApi.upload(pictureFile)
       .pipe(
-        switchMap(uploadres => {
-          newPicture.image = uploadres.filename;
+        switchMap(uploadResponse => {
+          newPicture.image = uploadResponse.filename;
           return this.pictureApi.add(newPicture);
       }))
       .subscribe({
@@ -67,18 +52,7 @@ export class UploadPicturePage {
   }
 
 
-  submit() {
-    if (this.form.invalid) {
-      this.form.markAllAsDirty();
-      return;
-    }
-    const newPicture:PostPictureDTO = {
-      title: this.form.value.title!,
-      description: this.form.value.description!,
-      image: this.form.value.image!
-    }
-    this.addPicture(newPicture, this.pictureFile);
-  }
+
 
 
 }

@@ -14,7 +14,7 @@ export class PicturesList {
 
   readonly changeOnPicture = output<boolean>();
   readonly deletePictureOutput = output<Picture>();
-  readonly updatePictureOutPut = output<Picture>();
+  readonly updatePictureOutput = output<Picture>();
 
 
   reloadList(addLikeOutput:boolean) {
@@ -27,8 +27,8 @@ export class PicturesList {
     this.deletePictureOutput.emit(picture);
   }
 
-  uploadPicture(picture:Picture) {
-    this.updatePictureOutPut.emit(picture);
+  updatePicture(picture:Picture) {
+    this.updatePictureOutput.emit(picture);
   }
   
 }
