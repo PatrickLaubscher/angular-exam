@@ -10,10 +10,11 @@ import { ActivatedRoute } from '@angular/router';
 import { StandardModal } from "../../standard-modal/standard-modal";
 import { PictureForm } from "../../pictures-page/upload-picture-page/picture-form/picture-form";
 import { PostPictureDTO } from '../../api/dto';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-account-main-page',
-  imports: [PicturesList, DisplayPagination, StandardModal, PictureForm],
+  imports: [PicturesList, DisplayPagination, StandardModal, PictureForm, ],
   templateUrl: './account-main-page.html',
   styleUrl: './account-main-page.css'
 })
@@ -27,6 +28,7 @@ export class AccountMainPage {
   protected readonly route = inject(ActivatedRoute);
   protected readonly picture = signal<Picture|null>(null);
   protected readonly serverError = signal('');
+  protected readonly snackBar = inject(MatSnackBar);
 
   protected readonly page = input(1, {transform: (val) => val ? Number(val):1});
 
@@ -54,6 +56,7 @@ export class AccountMainPage {
     next: () => {
       this.isDeleteModalOpen.set(false);
       this.picturePage.reload();
+      this.snackBar.open('L\'image a bien été supprimée', 'ok', {duration:5000});
     },
     error: () => {
       this.serverError.set("Erreur dans la suppression de l'image");
@@ -80,6 +83,7 @@ export class AccountMainPage {
     next: () => {
       this.isUpdateModalOpen.set(false);
       this.picturePage.reload();
+      this.snackBar.open('L\'image a bien été modifiée', 'ok', {duration:5000});
     },
     error: () => {
       this.serverError.set("Erreur dans la modification de l'image");
