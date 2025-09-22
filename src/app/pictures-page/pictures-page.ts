@@ -5,8 +5,7 @@ import { DisplayPagination } from "../display-pagination/display-pagination";
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-
-
+import { Picture } from '../shared/entities';
 
 
 
@@ -28,12 +27,18 @@ export class PicturesPage {
     { initialValue: 1 }
   );
   
-  protected readonly picturePage = this.pictureApi.getAll(this.pageNumber);
+  protected picturePage = this.pictureApi.getAll(this.pageNumber);
 
-  reload(changeOnPicture:boolean){
-    if(changeOnPicture){
-      this.picturePage.reload();
-    }
+  reload(updatedPicture: Picture) {
+    const currentPage = this.picturePage.value();
+    if (!currentPage) return;
+
+    const updatedList = currentPage.content.map(pic =>
+      pic.id === updatedPicture.id ? updatedPicture : pic
+    );
+    this.picturePage.value()!.content = updatedList;
+  
   }
+
   
 }

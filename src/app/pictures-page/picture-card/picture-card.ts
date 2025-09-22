@@ -22,7 +22,7 @@ export class PictureCard {
   readonly picture = input.required<Picture>();
   private readonly likeApi = inject(LikeApi);
 
-  readonly addLikeOutput = output<boolean>();
+  readonly eventLikeOutput = output<Picture>();
   readonly deletePictureOutput = output<Picture>();
   readonly updatePictureOutput = output<Picture>();
   
@@ -34,7 +34,9 @@ export class PictureCard {
       return
     }
     this.likeApi.add(this.picture().id).subscribe({
-      next: () => this.addLikeOutput.emit(true)
+      next: (updatedPic) => {
+      this.eventLikeOutput.emit(updatedPic);
+      }
     });
   }
 

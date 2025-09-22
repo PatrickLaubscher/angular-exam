@@ -12,15 +12,13 @@ export class PicturesList {
 
   readonly pictures = input.required<Picture[]>();
 
-  readonly changeOnPicture = output<boolean>();
+  readonly changeOnPicture = output<Picture>();
   readonly deletePictureOutput = output<Picture>();
   readonly updatePictureOutput = output<Picture>();
 
 
-  reloadList(addLikeOutput:boolean) {
-    if(addLikeOutput) {
-      this.changeOnPicture.emit(true);
-    }
+  reloadList(picture:Picture) {
+    this.changeOnPicture.emit(picture);
   }
 
   deletePicture(picture:Picture) {
