@@ -1,6 +1,6 @@
 import { Component, inject, input, output } from '@angular/core';
 import { Picture } from '../../shared/entities';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { bootstrapSuitHeart, bootstrapSuitHeartFill } from '@ng-icons/bootstrap-icons';
 import { LikeApi } from '../../api/like/like-api';
@@ -22,7 +22,11 @@ export class PictureCard {
   readonly picture = input.required<Picture>();
   private readonly likeApi = inject(LikeApi);
 
-  readonly addLikeOutput = output<boolean>(); 
+  readonly addLikeOutput = output<boolean>();
+  readonly deletePictureOutput = output<Picture>();
+  readonly updatePictureOutput = output<Picture>();
+  
+  protected readonly router = inject(Router);
 
   like() {
     if(!this.auth.isLogged) {
@@ -32,6 +36,18 @@ export class PictureCard {
     this.likeApi.add(this.picture().id).subscribe({
       next: () => this.addLikeOutput.emit(true)
     });
+  }
+
+  deletePicture() {
+    this.deletePictureOutput.emit(this.picture());
+  }
+
+  updatePicture() {
+    this.updatePictureOutput.emit(this.picture());
+  }
+
+  get currentUrl(): string {
+    return this.router.url;
   }
 
 }

@@ -1,0 +1,12 @@
+<!-- The Modal -->
+<div id="myModal" class="modal" [class.hide]="!open()">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" (click)="open.set(false)">&times;</span>
+        <ng-content select="card-title"/>
+        <ng-content select="card-body"/>
+        <ng-content select="card-footer"/>
+    </div>
+
+</div>

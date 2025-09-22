@@ -5,6 +5,7 @@
     <p class="card-text">
         <img class="img-thumbnail w-100 mb-2" [src]="picture().thumbnailLink" alt="{{picture().title}}">
 
+        @if(!currentUrl.includes('account')) {
         <button class="like fs-5 d-block m-auto" (click)="like()">
           @if(picture().likes?.length == 0) {
           <ng-icon name="bootstrapSuitHeart" ></ng-icon>
@@ -12,15 +13,26 @@
           <ng-icon name="bootstrapSuitHeartFill" ></ng-icon>
           <span class="p-1">{{picture().likes?.length}}</span>
           }
-
         </button>
-
-
+        }
     </p>
 
-    <div>
-        <button [routerLink]="['/picture', picture().id]" class="d-block m-auto btn btn-primary btn-sm">Détails</button>
+    <div class="mb-4">
+        <button [routerLink]="['/picture', picture().id]" class="d-block m-auto btn btn-primary btn-sm">
+        @if(currentUrl.includes('account')) {
+          Voir les détails de l'image
+        } @else {
+          Détails
+        }
+        </button>
     </div>
+
+    @if(currentUrl.includes('account')) {
+      <div class="d-flex gap-2">
+        <button class="d-block m-auto btn btn-warning btn-sm" (click)="updatePicture()">Modifier les infos</button>
+        <button class="d-block m-auto btn btn-danger btn-sm" (click)="deletePicture()">Supprimer l'image</button>
+      </div>
+    }
     
   </div>
 </article>
