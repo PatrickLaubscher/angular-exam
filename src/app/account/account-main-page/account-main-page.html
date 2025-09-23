@@ -58,7 +58,7 @@
 
             <app-picture-form [pictureValues]="picture()!" (pictureFormSubmit)="updatePicture($event.picture, $event.pictureFile)"/>
 
-            <button class="btn btn-warning btn-sm d-block mx-auto my-4" (click)="isDeleteModalOpen.set(false)">Annuler les modifications</button>
+            <button class="btn btn-warning btn-sm d-block mx-auto my-4" (click)="isUpdateModalOpen.set(false)">Annuler les modifications</button>
         </div>
     }
 </app-standard-modal>
