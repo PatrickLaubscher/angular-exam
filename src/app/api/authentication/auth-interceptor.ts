@@ -5,11 +5,20 @@ import { catchError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
+  const clone = req.clone({
+    setHeaders : {
+      'X-Requested-With': 'XMLHttpRequest'
+    },
+    withCredentials: true
+  })
+  return next(clone);
 
-  const auth = inject(AuthenticationApi);
+
+  
+/*   const auth = inject(AuthenticationApi);
 
   const platformId = inject(PLATFORM_ID);
-  if(platformId!='browser' /* || !localStorage.getItem('token') || req.url.includes('refresh-token')*/) {
+  if(platformId!='browser' || !localStorage.getItem('token') || req.url.includes('refresh-token')) {
     return next(req);
   }
 
@@ -19,28 +28,15 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
         auth.reRouteToLogin();
 
-        /*return auth.refreshToken().pipe(
+        return auth.refreshToken().pipe(
           concatMap(() => next(cloneWithBearer(req)))
-        );*/
+        );
 
       };
       throw err;
     })
-  );
+  ); */
    
-
-
-  function cloneWithBearer(req:HttpRequest<unknown>) {
-    const token = JSON.parse(localStorage.getItem('csrfToken') || '{}');
-    return req.clone({
-      setHeaders: {
-        "Content-Type": "application/json",
-        "X-XSRF-TOKEN": token
-      }
-    });
-  }
-
-
 
 /*   function cloneWithBearer(req:HttpRequest<unknown>) {
     return req.clone({
@@ -59,4 +55,5 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   })
   return next(clone);
  */
+
 };
